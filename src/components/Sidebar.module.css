@@ -1,0 +1,124 @@
+.sidebar {
+    background: var(--purple-500);
+    height: 100%;
+}
+
+.buttonHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.625rem;
+}
+
+.searchPlaces {
+
+    margin-left: 2.875rem;
+    padding: 10px;
+    background-color: var(--lilac-300);
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.cross {
+    background-color: var(--lilac-300);
+    border: 1px solid var(--lilac-300);
+    border-radius: 50px;
+    color: var(--white);
+    cursor: pointer;
+    padding: 6px;
+    
+    display: flex;
+    align-items: center;
+    margin-right: 3.375rem;
+
+}
+
+.cloud {
+
+   
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.1;
+
+}
+
+.cloudBg {
+    
+    margin-top: 31px;
+    position: relative;
+}
+
+.imgWeather {
+    width: 10rem ;
+    height: 12rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.temperature {
+margin: 87px 0px 87px 0;
+display: flex;
+justify-content: center;
+}
+
+.number {
+   
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+.graus {
+    font-size: 3rem;
+    font-weight: 100;
+    color: var(--lilac-100);
+}
+
+.titleWeather {
+   text-align: center;
+   font-weight: 600;
+   color: var(--lilac-100);
+}
+
+.info {
+    margin: 87px 0px 31px 0;
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+
+}
+
+.day, .dayTwo, .spanDay {
+font-size: 1.125rem;
+color: var(--lilac-200);
+
+}
+
+.centerInfo {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.iconLoc, .location {
+    color: var(--lilac-200)
+}
+
+.location {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
