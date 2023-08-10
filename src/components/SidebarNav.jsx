@@ -2,6 +2,7 @@ import { CaretRight, MagnifyingGlass } from "@phosphor-icons/react";
 import styles from "./SidebarNav.module.css";
 
 export function SidebarNav() {
+
   return (
     <aside className={styles.sidebar}>
         <div className={styles.boxClose}>

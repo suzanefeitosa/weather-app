@@ -5,9 +5,63 @@
     align-items: flex-start;
 }
 
+.content{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 6.75rem 2rem 0 2rem;
+}
+
+.buttonCOrF {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 2rem;
+    right: 4.2rem;
+
+}
+
+.cOrF {
+
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px;
+    margin-left: 8px;
+
+
+}
+
+.colorType {
+    background: var(--lilac-400);
+    color: var(--white);
+}
+
+/* .progressBarWrapper, .progressBar {
+    height: 2rem;
+}
+
+.progressBarWrapper {
+    position: absolute;
+    background-color: white;
+    width: 6rem;
+}
+
+.progressBar {
+    position: relative;
+    background-color: yellow;
+} */
+
 
 @media (max-width: 768px) {
     .wrapper {
         grid-template-columns: 1fr;
+    }
+
+    .content {
+        max-width: 460px;
+        flex-wrap: wrap;
+        padding-top: 0;
     }
 }

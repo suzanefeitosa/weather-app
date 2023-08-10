@@ -1,11 +1,11 @@
 import styles from "./Sidebar.module.css";
 import { Crosshair, MapPin } from "@phosphor-icons/react";
 
-export function Sidebar() {
+export function Sidebar({imgWeather,}) {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.buttonHeader}>
-        <button className={styles.searchPlaces}>Search for places</button>
+        <button to="/nav" className={styles.searchPlaces}>Search for places</button>
         <button className={styles.cross}>
           <Crosshair size={24} />
         </button>
@@ -21,7 +21,7 @@ export function Sidebar() {
           <div className={styles.centerContent}>
             <img
               className={styles.imgWeather}
-              src="./src/assets/Shower.png"
+              src={imgWeather}
               alt="Weather"
             />
           </div>
