@@ -13,7 +13,7 @@ export function InfoWeather({dayWeek, imgWeather, maxTemperature, minTemperature
        <div className={styles.weatherWeek}>
         <div className={styles.containerDayImg}>
         <p className={styles.dayWeek}>{dayWeek}</p>
-        <img className={styles.imgWeather} src={imgWeather} />
+        <img className={styles.imgWeather} src="./src/assets/Hail.png" />
         </div>
         <div className={styles.temperature}>
         <p className={styles.maxDegree}>{maxTemperature}<span>{degreeValue}</span></p>
