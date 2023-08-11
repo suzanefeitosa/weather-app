@@ -1,11 +1,12 @@
 import styles from "./Sidebar.module.css";
 import { Crosshair, MapPin } from "@phosphor-icons/react";
+import { CloudBackground } from "../assets";
 
-export function Sidebar({imgWeather,}) {
+export function Sidebar({imgWeather, change}) {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.buttonHeader}>
-        <button to="/nav" className={styles.searchPlaces}>Search for places</button>
+        <button onClick={change} className={styles.searchPlaces}>Search for places</button>
         <button className={styles.cross}>
           <Crosshair size={24} />
         </button>
@@ -15,7 +16,7 @@ export function Sidebar({imgWeather,}) {
         <div className={styles.cloudBg}>
           <img
             className={styles.cloud}
-            src="./src/assets/Cloud-background.svg"
+            src={CloudBackground}
             alt="Cloud"
           />
           <div className={styles.centerContent}>

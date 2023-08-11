@@ -1,12 +1,12 @@
 import { CaretRight, MagnifyingGlass } from "@phosphor-icons/react";
 import styles from "./SidebarNav.module.css";
 
-export function SidebarNav() {
+export function SidebarNav({change}) {
 
   return (
     <aside className={styles.sidebar}>
         <div className={styles.boxClose}>
-            <button className={styles.close}>X</button>
+            <button onClick={change} className={styles.close}>X</button>
         </div>
       <div className={styles.search}>
         <button className={styles.iconSearchAndInput}>

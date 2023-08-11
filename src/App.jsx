@@ -5,17 +5,36 @@ import { SidebarNav } from "./components/SidebarNav";
 import { InfoWeather } from "./components/infoWeather";
 import { DataWeather } from "./components/dataWeather";
 import { useState } from "react";
+import { Hail, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
+
+
 
 function App() {
 
   const [degree, setDegree] = useState("C")
+  const [changeComp, setChangeComp] = useState(true)
+
+  const changeC = () => {
+   setChangeComp(!changeComp)
+  }
 
   return (
     <>
       <div className={styles.wrapper}>
-        <Sidebar imgWeather="./src/assets/Shower.svg" />
-        {/* <SidebarNav/> */}
 
+        {
+          changeComp  
+          ?  
+          <Sidebar 
+          imgWeather={Shower}
+          change={changeC} 
+          />
+          :
+          <SidebarNav
+          change={changeC} 
+          />
+
+        }
         <main>
 
         <div className={styles.buttonCOrF}>
@@ -26,7 +45,7 @@ function App() {
           <div className={styles.content}>
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Sleet.svg"}
+              imgWeather={Sleet}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -34,7 +53,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Clear.svg"}
+              imgWeather={Thunderstorm}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -42,7 +61,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Hail.svg"}
+              imgWeather={LightCloud}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -50,7 +69,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/LightRain.svg"}
+              imgWeather={Hail}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -58,7 +77,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Snow.svg"}
+              imgWeather={LightCloud}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
