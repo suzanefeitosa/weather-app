@@ -44,7 +44,6 @@
 
 .cloudBg {
     
-    margin-top: 31px;
     position: relative;
 }
 
@@ -65,7 +64,7 @@
 }
 
 .temperature {
-margin: 87px 0px 87px 0;
+margin-bottom: 1rem;
 display: flex;
 justify-content: center;
 }
@@ -89,7 +88,7 @@ justify-content: center;
 }
 
 .info {
-    margin: 87px 0px 31px 0;
+    margin: 220px 0px 31px 0;
     display: flex;
     justify-content: space-around;
     width: 200px;

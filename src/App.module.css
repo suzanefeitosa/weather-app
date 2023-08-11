@@ -8,15 +8,13 @@
 .content{
     display: flex;
     justify-content: space-evenly;
-    padding: 6.75rem 2rem 0 2rem;
+    padding: 1rem 2rem 0 2rem;
 }
 
 .buttonCOrF {
     display: flex;
     justify-content: flex-end;
-    position: fixed;
-    top: 2rem;
-    right: 4.2rem;
+    padding: 2rem 4.2rem 0 0;
 
 }
 
@@ -38,21 +36,6 @@
     color: var(--white);
 }
 
-/* .progressBarWrapper, .progressBar {
-    height: 2rem;
-}
-
-.progressBarWrapper {
-    position: absolute;
-    background-color: white;
-    width: 6rem;
-}
-
-.progressBar {
-    position: relative;
-    background-color: yellow;
-} */
-
 
 @media (max-width: 768px) {
     .wrapper {
@@ -62,6 +45,11 @@
     .content {
         max-width: 460px;
         flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 3.5rem 0 3.5rem;
+    }
+
+    .buttonCOrF  {
         padding-top: 0;
     }
 }

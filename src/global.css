@@ -24,8 +24,17 @@ body {
     font-family: 'Raleway' , sans-serif;
     color: var(--white);
     background: var(--purple-900);
+   
 }
 
 :focus {
     outline: transparent; 
+}
+
+@media (max-width: 768px) {
+    body {
+
+        background: var(--purple-700);
+
+    }
 }

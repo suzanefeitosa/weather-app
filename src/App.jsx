@@ -3,6 +3,7 @@ import "./global.css";
 import styles from "./App.module.css";
 import { SidebarNav } from "./components/SidebarNav";
 import { InfoWeather } from "./components/infoWeather";
+import { DataWeather } from "./components/dataWeather";
 import { useState } from "react";
 
 function App() {
@@ -64,9 +65,11 @@ function App() {
             />
           </div>
 
-          {/* <div className={styles.progressBarWrapper}>
-            <div style={{width:varNameAPI.propHumidity+"%"}} className={styles.progressBar}></div>
-          </div> */}
+          <DataWeather
+          humidity={"84"}
+          
+          />
+
         </main>
       </div>
     </>
