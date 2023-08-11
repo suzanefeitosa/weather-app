@@ -56,9 +56,26 @@ export function DataWeather({ humidity }) {
             </div>
           </div>
         </div>
-        <div className={styles.cardVisibility}></div>
-        <div className={styles.cardAir}></div>
+        <div className={styles.cardVisibility}>
+          <div className={styles.contentVisi}>
+            <h2 className={styles.titleVisib}>Visibility</h2>
+            <p className={styles.visiData}>
+              <span>6,4</span>miles
+            </p>
+          </div>
+        </div>
+        <div className={styles.cardAir}>
+          <div className={styles.contentAir}>
+            <h2 className={styles.titleAir}>Air Pressure</h2>
+            <p className={styles.airData}>
+              <span>998</span>mb
+            </p>
+          </div>
+        </div>
       </div>
+      <footer>
+        <p className={styles.textFooter}>Created by <a href="https://github.com/suzanefeitosa">Suzane Feitosa ♥</a></p>
+      </footer>
     </>
   );
 }

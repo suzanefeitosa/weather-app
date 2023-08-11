@@ -30,11 +30,3 @@ body {
 :focus {
     outline: transparent; 
 }
-
-@media (max-width: 768px) {
-    body {
-
-        background: var(--purple-700);
-
-    }
-}
