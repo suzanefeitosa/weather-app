@@ -1,4 +1,4 @@
-import Clear from './clear.svg';
+import Clear from './Clear.svg';
 import CloudBackground from './Cloud-background.svg';
 import Hail from './Hail.svg';
 import HeavyCloud from './HeavyCloud.svg';
