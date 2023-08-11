@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <div className={styles.wrapper}>
-        <Sidebar imgWeather="./src/assets/Shower.png" />
+        <Sidebar imgWeather="./src/assets/Shower.svg" />
         {/* <SidebarNav/> */}
 
         <main>
@@ -26,7 +26,7 @@ function App() {
           <div className={styles.content}>
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/sleet.png"}
+              imgWeather={"./src/assets/Sleet.svg"}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -34,7 +34,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Clear.png"}
+              imgWeather={"./src/assets/Clear.svg"}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -42,7 +42,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Hail.png"}
+              imgWeather={"./src/assets/Hail.svg"}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -50,7 +50,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/LightRain.png"}
+              imgWeather={"./src/assets/LightRain.svg"}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}
@@ -58,7 +58,7 @@ function App() {
 
             <InfoWeather
               dayWeek={"Tomorrow"}
-              imgWeather={"./src/assets/Snow.png"}
+              imgWeather={"./src/assets/Snow.svg"}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}

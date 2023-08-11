@@ -15,7 +15,7 @@ export function Sidebar({imgWeather,}) {
         <div className={styles.cloudBg}>
           <img
             className={styles.cloud}
-            src="./src/assets/Cloud-background.png"
+            src="./src/assets/Cloud-background.svg"
             alt="Cloud"
           />
           <div className={styles.centerContent}>
