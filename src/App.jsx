@@ -4,19 +4,24 @@ import styles from "./App.module.css";
 import { SidebarNav } from "./components/SidebarNav";
 import { InfoWeather } from "./components/infoWeather";
 import { DataWeather } from "./components/dataWeather";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Hail, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
-
 
 
 function App() {
 
   const [degree, setDegree] = useState("C")
   const [changeComp, setChangeComp] = useState(true)
+  // const [weather, setWeather] = useState([])
+  const key = import.meta.env.VITE_API_KEY;
+  const location = "London"
+  const url = `api.openweathermap.org/data/2.5/forecast?lat=-8.0539&lon=-34.8811&appid=${key}`;
+  
 
   const changeC = () => {
    setChangeComp(!changeComp)
   }
+  // ${key}
 
   return (
     <>
@@ -28,6 +33,7 @@ function App() {
           <Sidebar 
           imgWeather={Shower}
           change={changeC} 
+          maxTemperature={16}
           />
           :
           <SidebarNav
@@ -46,38 +52,6 @@ function App() {
             <InfoWeather
               dayWeek={"Tomorrow"}
               imgWeather={Sleet}
-              maxTemperature={16}
-              minTemperature={11}
-              degreeType={degree}
-            />
-
-            <InfoWeather
-              dayWeek={"Tomorrow"}
-              imgWeather={Thunderstorm}
-              maxTemperature={16}
-              minTemperature={11}
-              degreeType={degree}
-            />
-
-            <InfoWeather
-              dayWeek={"Tomorrow"}
-              imgWeather={LightCloud}
-              maxTemperature={16}
-              minTemperature={11}
-              degreeType={degree}
-            />
-
-            <InfoWeather
-              dayWeek={"Tomorrow"}
-              imgWeather={Hail}
-              maxTemperature={16}
-              minTemperature={11}
-              degreeType={degree}
-            />
-
-            <InfoWeather
-              dayWeek={"Tomorrow"}
-              imgWeather={LightCloud}
               maxTemperature={16}
               minTemperature={11}
               degreeType={degree}

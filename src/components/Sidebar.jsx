@@ -1,13 +1,47 @@
 import styles from "./Sidebar.module.css";
 import { Crosshair, MapPin } from "@phosphor-icons/react";
 import { CloudBackground } from "../assets";
+import { useEffect, useState } from "react";
 
-export function Sidebar({imgWeather, change}) {
+
+
+export function Sidebar({imgWeather, change, maxTemperature}) {
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  const getLocation = () => {
+  
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+         setLatitude(position.coords.latitude)
+        setLongitude(position.coords.longitude)
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }
+  
+    useEffect(() => {
+     getLocation()
+    }, []);
+  
+    
+      console.log("lat = " + latitude + " long = " + longitude)
+     
+
   return (
+
     <aside className={styles.sidebar}>
       <header className={styles.buttonHeader}>
-        <button onClick={change} className={styles.searchPlaces}>Search for places</button>
-        <button className={styles.cross}>
+        <button onClick ={change} className={styles.searchPlaces}>Search for places</button>
+        <button onClick={() => getLocation()} className={styles.cross}>
           <Crosshair size={24} />
         </button>
       </header>
@@ -30,8 +64,7 @@ export function Sidebar({imgWeather, change}) {
       </figure>
 
       <div className={styles.temperature}>
-        <h1 className={styles.number}>
-        15<span className={styles.graus}>ºC</span>
+        <h1 className={styles.number}>{maxTemperature}<span className={styles.graus}>ºC</span>
         </h1>
       </div>
 

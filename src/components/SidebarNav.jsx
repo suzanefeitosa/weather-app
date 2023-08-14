@@ -25,12 +25,6 @@ export function SidebarNav({change}) {
         <button className={styles.city}>
           London <CaretRight className={styles.arrow} /> 
         </button>
-        <button className={styles.city}>
-          Barcelona <CaretRight className={styles.arrow} />
-        </button>
-        <button className={styles.city}>
-          Long Beach <CaretRight className={styles.arrow}  />
-        </button>
         {/* o caretRight só vai aparecer no hover! */}
       </div>
     </aside>
