@@ -30,8 +30,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getTodayWeather()
-    getForecast() 
+    if(lat != "") {
+      getTodayWeather()
+      getForecast() 
+    }
   },[lat, long])
 
   const changeC = () => {
@@ -39,10 +41,9 @@ function App() {
   };
 
   const getLocation = () => {
-  
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        (position) => {          
           setLat(position.coords.latitude)
           setLong(position.coords.longitude)
         },
@@ -113,7 +114,43 @@ function App() {
     })      
   }
 
+ 
+  async function getTodayWeatherByCity(cityName) {
+    await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`)
+    .then((response) => response.json()).then((data) => {
+      setCity(data.name)
+      setNameWeather(data.weather[0].main)
+      setTodayTemp((data.main.temp - 273.15).toFixed(0))
+      setWind((data.wind.speed * 2.23694).toFixed(1))
+      setHumidity(data.main.humidity)
+      setVisibility((data.visibility * 0.000621371192).toFixed(1))
+      setAir(data.main.pressure)
+      setIconRotation(`rotate(${data.wind.deg}deg)`)
+      setWindDirection(data.wind.deg)
+    })      
+  }
 
+  async function getForecastByCity(cityName) {
+    await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}`)
+    .then((response) => response.json()).then((data) => {
+      var filteredWeatherList = data.list.filter((weather) => {
+        if(weather.dt_txt.split(" ")[1] == "12:00:00"){
+          weather.main.temp_max = (weather.main.temp_max - 273.15).toFixed(1)
+          weather.main.temp_min = (weather.main.temp_min - 273.15).toFixed(1)
+          return weather
+        }
+      })
+     
+      setWeather(filteredWeatherList)
+    })      
+  }
+
+  const searchByCity = (cityName) => {
+    getForecastByCity(cityName)
+    getTodayWeatherByCity(cityName)
+    setLat("")
+    setLong("")
+  }
 
   const getWindDirection = (angle) => {
     const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
@@ -154,7 +191,7 @@ function App() {
         {changeComp ? (
           <Sidebar imgWeather={getImageWeather(nameWeather)} change={changeC} maxTemperature={todayTemp} city={city} weatherName={nameWeather} degreeType={degree} getLocation={getLocation}/>
         ) : (
-          <SidebarNav change={changeC} />
+          <SidebarNav change={changeC} searchByCity={searchByCity} />
         )}
         <main>
           <div className={styles.buttonCOrF}>
