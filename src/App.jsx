@@ -6,7 +6,7 @@ import { InfoWeather } from "./components/infoWeather";
 import { DataWeather } from "./components/dataWeather";
 import { useEffect, useState } from "react";
 import { format, parseISO } from 'date-fns';
-import { Hail, HeavyCloud, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
+import { Clear,  HeavyCloud, HeavyRain, LightCloud, LightRain, Snow, Thunderstorm } from "./assets";
 
 function App() {
   const [degree, setDegree] = useState("C");
@@ -21,12 +21,42 @@ function App() {
   const [air, setAir] = useState("")
   const [todayTemp, setTodayTemp] = useState(0.0)
   const [nameWeather, setNameWeather] = useState("")
+  const [long, setLong] = useState("")
+  const [lat, setLat] = useState("")
   const key = import.meta.env.VITE_API_KEY;
   
+  useEffect(()  =>  {
+    getLocation()
+  }, []);
+
+  useEffect(() => {
+    getTodayWeather()
+    getForecast() 
+  },[lat, long])
 
   const changeC = () => {
     setChangeComp(!changeComp);
   };
+
+  const getLocation = () => {
+  
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude)
+          setLong(position.coords.longitude)
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }
+
+
 
   const changeDegreeType =  (degreeType) => {
     if(degree != degreeType){
@@ -53,7 +83,7 @@ function App() {
   }
 
   async function getTodayWeather() {
-    await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-8.0539&lon=-34.8811&appid=${key}`)
+    await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}`)
     .then((response) => response.json()).then((data) => {
       setCity(data.name)
       setNameWeather(data.weather[0].main)
@@ -68,7 +98,7 @@ function App() {
   }
 
   async function getForecast() {
-    await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=-8.0539&lon=-34.8811&appid=${key}`)
+    await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${key}`)
     .then((response) => response.json()).then((data) => {
 
       var filteredWeatherList = data.list.filter((weather) => {
@@ -78,14 +108,12 @@ function App() {
           return weather
         }
       })
+     
       setWeather(filteredWeatherList)
     })      
   }
 
-   useEffect(()  =>  {
-    getTodayWeather()
-    getForecast() 
-  }, []);
+
 
   const getWindDirection = (angle) => {
     const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
@@ -93,24 +121,38 @@ function App() {
     return directions[(index % 16)];
   };
 
-  // const getImageWeather = (main) => {
+  const getImageWeather = (weatherType, weatherId) => {
 
-  //   switch (main) {
+    switch (weatherType) {
+      case "Clouds":
+        return weatherId > 802 ? HeavyCloud : LightCloud;
 
-  //     case "Clouds":
-  //       <HeavyCloud/>
-  //     break;
-    
-  //   }
+      case "Clear":
+        return Clear;
 
-  // }
+      case "Snow":
+        return Snow;
+
+      case "Rain":
+        return HeavyRain;
+
+      case "Drizzle":
+        return LightRain;
+
+      case "Thunderstorm":
+        return Thunderstorm;
+
+      default: 
+        return Clear
+    }
+  }
 
   
   return (
     <>
       <div className={styles.wrapper}>
         {changeComp ? (
-          <Sidebar imgWeather={Shower} change={changeC} maxTemperature={todayTemp} city={city} weatherName={nameWeather} degreeType={degree}/>
+          <Sidebar imgWeather={getImageWeather(nameWeather)} change={changeC} maxTemperature={todayTemp} city={city} weatherName={nameWeather} degreeType={degree} getLocation={getLocation}/>
         ) : (
           <SidebarNav change={changeC} />
         )}
@@ -146,7 +188,7 @@ function App() {
                 <InfoWeather 
                     key={item.dt}   
                     dayWeek={ i === 0 ? "Tomorrow" : format(parseISO(item.dt_txt), 'EEE, d MMM')}
-                    imgWeather={Sleet}
+                    imgWeather={getImageWeather(item.weather[0].main, item.weather[0].id)}
                     maxTemperature={item.main.temp_max}
                     minTemperature={item.main.temp_min}
                     degreeType={degree}
