@@ -148,14 +148,13 @@
     width: 14.313rem;
 }
 
-footer {
-margin-top: 3rem;
-}
-
 .textFooter {
     font-weight: 500;
     font-size: 0.875rem;
     color: var(--lilac-100);
+    margin: 2rem;
+
+    text-align: center;
 }
 
 .textFooter a {

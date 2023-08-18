@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 
 
-export function Sidebar({imgWeather, change, maxTemperature}) {
+export function Sidebar({imgWeather, change, maxTemperature, degreeType, weatherName, city}) {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-
+  var todaysDate = new Date(Date.now()).toUTCString().substring(0,11)
   const getLocation = () => {
   
     if (navigator.geolocation) {
@@ -33,7 +33,7 @@ export function Sidebar({imgWeather, change, maxTemperature}) {
     }, []);
   
     
-      console.log("lat = " + latitude + " long = " + longitude)
+//      console.log("lat = " + latitude + " long = " + longitude)
      
 
   return (
@@ -64,21 +64,21 @@ export function Sidebar({imgWeather, change, maxTemperature}) {
       </figure>
 
       <div className={styles.temperature}>
-        <h1 className={styles.number}>{maxTemperature}<span className={styles.graus}>ºC</span>
+        <h1 className={styles.number}>{maxTemperature}<span className={styles.graus}>º{degreeType}</span>
         </h1>
       </div>
 
-      <h2 className={styles.titleWeather}>Shower</h2>
+      <h2 className={styles.titleWeather}>{weatherName}</h2>
 
         <div className={styles.centerInfo}>
       <div className={styles.info}>
-        <p className={styles.day}>Today</p><span className={styles.spanDay}>&bull;</span><p className={styles.dayTwo}>Tues, 8 aug</p>
+        <p className={styles.day}>Today</p><span className={styles.spanDay}>&bull;</span><p className={styles.dayTwo}>{todaysDate}</p>
       </div>
       </div>
 
-      <footer>
+      <footer className={styles.footerSidebar}>
         <MapPin className={styles.iconLoc} size={24} />
-        <p className={styles.location}>Helsinki</p>
+        <p className={styles.location}>{city}</p>
       </footer> 
     </aside>
   );
