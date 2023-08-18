@@ -2,6 +2,7 @@ import styles from "./Sidebar.module.css";
 import { Crosshair, MapPin } from "@phosphor-icons/react";
 import { CloudBackground } from "../assets";
 import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
 
 
@@ -9,7 +10,7 @@ export function Sidebar({imgWeather, change, maxTemperature, degreeType, weather
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  var todaysDate = new Date(Date.now()).toUTCString().substring(0,11)
+  var todaysDate = format(new Date(), 'EEE, d MMM');
   const getLocation = () => {
   
     if (navigator.geolocation) {

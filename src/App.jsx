@@ -6,7 +6,7 @@ import { InfoWeather } from "./components/infoWeather";
 import { DataWeather } from "./components/dataWeather";
 import { useEffect, useState } from "react";
 import { format, parseISO } from 'date-fns';
-import { Hail, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
+import { Hail, HeavyCloud, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
 
 function App() {
   const [degree, setDegree] = useState("C");
@@ -92,6 +92,19 @@ function App() {
     const index = Math.round(angle / 22.5);
     return directions[(index % 16)];
   };
+
+  // const getImageWeather = (main) => {
+
+  //   switch (main) {
+
+  //     case "Clouds":
+  //       <HeavyCloud/>
+  //     break;
+    
+  //   }
+
+  // }
+
   
   return (
     <>
@@ -128,11 +141,11 @@ function App() {
           <div className={styles.content}>
           
             {
-              weather.map((item) => {
+              weather.map((item, i) => {
                 return (
                 <InfoWeather 
                     key={item.dt}   
-                    dayWeek={format(parseISO(item.dt_txt), 'EEE, d MMM')}
+                    dayWeek={ i === 0 ? "Tomorrow" : format(parseISO(item.dt_txt), 'EEE, d MMM')}
                     imgWeather={Sleet}
                     maxTemperature={item.main.temp_max}
                     minTemperature={item.main.temp_min}
