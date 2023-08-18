@@ -1,9 +1,8 @@
 import styles from "./dataWeather.module.css";
 import { NavigationArrow } from "@phosphor-icons/react";
 
-export function DataWeather({ humidity }) {
-  // const iconRotation = `rotate(${windDirection}deg)`;
-
+export function DataWeather({ wind, humidity, visibility, air, iconWind, windDirection }) {
+ 
   return (
     <>
       <div className={styles.containerTitle}>
@@ -14,7 +13,7 @@ export function DataWeather({ humidity }) {
           <div className={styles.contentWind}>
             <h2 className={styles.titleWind}>Wind status</h2>
             <p className={styles.windData}>
-              <span>7</span>mph
+              <span>{wind}</span>mph
             </p>
             <div className={styles.iconAndInfoWind}>
               <p className={styles.iconAndInfoWin}>
@@ -22,9 +21,9 @@ export function DataWeather({ humidity }) {
                   size={32}
                   weight="fill"
                   className={styles.iconWind}
-                  // style={{ transform: iconRotation }}
+                  style={{ transform: iconWind }}
                 />
-                <span className={styles.infoWind}>WSW</span>
+                <span className={styles.infoWind}>{windDirection}</span>
               </p>
             </div>
           </div>
@@ -60,7 +59,7 @@ export function DataWeather({ humidity }) {
           <div className={styles.contentVisi}>
             <h2 className={styles.titleVisib}>Visibility</h2>
             <p className={styles.visiData}>
-              <span>6,4</span>miles
+              <span>{visibility}</span>miles
             </p>
           </div>
         </div>
@@ -68,7 +67,7 @@ export function DataWeather({ humidity }) {
           <div className={styles.contentAir}>
             <h2 className={styles.titleAir}>Air Pressure</h2>
             <p className={styles.airData}>
-              <span>998</span>mb
+              <span>{air}</span>mb
             </p>
           </div>
         </div>

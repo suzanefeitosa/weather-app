@@ -5,6 +5,7 @@ import { SidebarNav } from "./components/SidebarNav";
 import { InfoWeather } from "./components/infoWeather";
 import { DataWeather } from "./components/dataWeather";
 import { useEffect, useState } from "react";
+import { format, parseISO } from 'date-fns';
 import { Hail, LightCloud, Shower, Sleet, Thunderstorm } from "./assets";
 
 function App() {
@@ -12,9 +13,16 @@ function App() {
   const [changeComp, setChangeComp] = useState(true);
   const [weather, setWeather] = useState([]);
   const [city, setCity] = useState("")
+  const [wind, setWind] = useState("")
+  const [iconRotation, setIconRotation] = useState("")
+  const [windDirection, setWindDirection] = useState("")
+  const [humidity, setHumidity] = useState ("")
+  const [visibility, setVisibility] = useState("")
+  const [air, setAir] = useState("")
   const [todayTemp, setTodayTemp] = useState(0.0)
   const [nameWeather, setNameWeather] = useState("")
   const key = import.meta.env.VITE_API_KEY;
+  
 
   const changeC = () => {
     setChangeComp(!changeComp);
@@ -36,9 +44,9 @@ function App() {
       })
     )
     if(degreeType == "F"){
-      setTodayTemp((todayTemp * 1.8 + 32).toFixed(1))
+      setTodayTemp((todayTemp * 1.8 + 32).toFixed(0))
     }else if(degreeType == "C"){
-      setTodayTemp(((todayTemp - 32) * 5/9).toFixed(1))
+      setTodayTemp(((todayTemp - 32) * 5/9).toFixed(0))
     }
   }
 
@@ -47,16 +55,22 @@ function App() {
   async function getTodayWeather() {
     await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-8.0539&lon=-34.8811&appid=${key}`)
     .then((response) => response.json()).then((data) => {
-        console.log(data)
       setCity(data.name)
       setNameWeather(data.weather[0].main)
-      setTodayTemp((data.main.temp - 273.15).toFixed(1))
+      setTodayTemp((data.main.temp - 273.15).toFixed(0))
+      setWind((data.wind.speed * 2.23694).toFixed(1))
+      setHumidity(data.main.humidity)
+      setVisibility((data.visibility * 0.000621371192).toFixed(1))
+      setAir(data.main.pressure)
+      setIconRotation(`rotate(${data.wind.deg}deg)`)
+      setWindDirection(data.wind.deg)
     })      
   }
 
   async function getForecast() {
     await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=-8.0539&lon=-34.8811&appid=${key}`)
     .then((response) => response.json()).then((data) => {
+
       var filteredWeatherList = data.list.filter((weather) => {
         if(weather.dt_txt.split(" ")[1] == "12:00:00"){
           weather.main.temp_max = (weather.main.temp_max - 273.15).toFixed(1)
@@ -73,10 +87,12 @@ function App() {
     getForecast() 
   }, []);
 
-
-
-
-
+  const getWindDirection = (angle) => {
+    const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+    const index = Math.round(angle / 22.5);
+    return directions[(index % 16)];
+  };
+  
   return (
     <>
       <div className={styles.wrapper}>
@@ -116,7 +132,7 @@ function App() {
                 return (
                 <InfoWeather 
                     key={item.dt}   
-                    dayWeek={"Tomorrow"}
+                    dayWeek={format(parseISO(item.dt_txt), 'EEE, d MMM')}
                     imgWeather={Sleet}
                     maxTemperature={item.main.temp_max}
                     minTemperature={item.main.temp_min}
@@ -128,7 +144,14 @@ function App() {
 
           </div>
 
-          <DataWeather humidity={"84"} />
+          <DataWeather 
+          wind={wind}
+          humidity={humidity}
+          visibility={visibility}
+          air={air}
+          iconWind={iconRotation}
+          windDirection={getWindDirection(windDirection)}
+          />
 
         </main>
       </div>
