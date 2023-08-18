@@ -30,9 +30,9 @@
 }
 
 .imgWeather {
-    margin-left: -8px;
-    width: 3.2rem;
-    height: 3.3rem;
+    margin: 1rem, 0rem, 0rem, 0.5rem;
+    width: 3.5rem;
+    height: 4rem;
 }
 
 .maxDegree , .minDegree{
