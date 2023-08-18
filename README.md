@@ -1,5 +1,5 @@
 ## <p align="center">Weather app</p>
-<p align="center">Um site de climas desenvolvido com React.js, é possível verificar as condições climáticas de qualquer lugar no mundo com apenas um clique!</p>
+<p align="center">Um site de climas desenvolvido com React.js. Através do APP é possível verificar as condições climáticas de qualquer lugar do mundo com apenas um clique!</p>
 <br>
 
 <p align="center">
