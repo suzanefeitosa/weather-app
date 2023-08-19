@@ -23,6 +23,7 @@ function App() {
   const [nameWeather, setNameWeather] = useState("")
   const [long, setLong] = useState("")
   const [lat, setLat] = useState("")
+  const [defaultImg, setDefaultImg] = useState("")
   const key = import.meta.env.VITE_API_KEY;
   
   useEffect(()  =>  {
@@ -95,6 +96,9 @@ function App() {
       setAir(data.main.pressure)
       setIconRotation(`rotate(${data.wind.deg}deg)`)
       setWindDirection(data.wind.deg)
+      let iconWeather = data.weather[0].icon
+      let iconUrl = `https://openweathermap.org/img/wn/${iconWeather}.png`
+      setDefaultImg(iconUrl)
     })      
   }
 
@@ -180,7 +184,7 @@ function App() {
         return Thunderstorm;
 
       default: 
-        return Clear
+        return defaultImg
     }
   }
 
