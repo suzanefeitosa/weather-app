@@ -107,7 +107,7 @@ function App() {
     .then((response) => response.json()).then((data) => {
 
       var filteredWeatherList = data.list.filter((weather) => {
-        if(weather.dt_txt.split(" ")[1] == "00:00:00"){
+        if(weather.dt_txt.split(" ")[1] == "12:00:00"){
           weather.main.temp_max = (weather.main.temp_max - 273.15).toFixed(1)
           weather.main.temp_min = (weather.main.temp_min - 273.15).toFixed(1)
           return weather
@@ -138,7 +138,7 @@ function App() {
     await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}`)
     .then((response) => response.json()).then((data) => {
       var filteredWeatherList = data.list.filter((weather) => {
-        if(weather.dt_txt.split(" ")[1] == "00:00:00"){
+        if(weather.dt_txt.split(" ")[1] == "12:00:00"){
           weather.main.temp_max = (weather.main.temp_max - 273.15).toFixed(1)
           weather.main.temp_min = (weather.main.temp_min - 273.15).toFixed(1)
           return weather
